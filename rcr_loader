@@ -3,10 +3,8 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
    Name = "RCR LOADER",
    LoadingTitle = "RCR System",
-   LoadingSubtitle = "Checking for updates...",
-   ConfigurationSaving = {
-      Enabled = false
-   },
+   LoadingSubtitle = "Auto-Update Enabled",
+   ConfigurationSaving = { Enabled = false },
    KeySystem = false,
 })
 
@@ -15,16 +13,27 @@ local LoaderTab = Window:CreateTab("Execute", 4483362458)
 local LoadButton = LoaderTab:CreateButton({
    Name = "RCR HUB",
    Callback = function()
-       -- This pulls the code from your specific GitHub link
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/glrishikesh-maker/MyScripts/refs/heads/main/RCRHUB_MAIN.lua"))()
+       local githubLink = "https://raw.githubusercontent.com/glrishikesh-maker/MyScripts/refs/heads/main/RCRHUB_MAIN.lua"
+       local cacheBuster = githubLink .. "?t=" .. os.time()
        
-       -- This closes the loader so the actual hub can take over
-       Rayfield:Destroy()
+       local success, err = pcall(function()
+           loadstring(game:HttpGet(cacheBuster))()
+       end)
+
+       if success then
+           Rayfield:Destroy()
+       else
+           Rayfield:Notify({
+               Title = "Update Error",
+               Content = "Failed to fetch newest code.",
+               Duration = 5
+           })
+       end
    end,
 })
 
 Rayfield:Notify({
    Title = "Loader Ready",
-   Content = "Click RCR HUB to start",
+   Content = "Updates are checked instantly.",
    Duration = 5,
 })
