@@ -1,46 +1,22 @@
-local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/skatbr/Luna/main/Source.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/lucid.lua"))()
+local Window = Library:CreateWindow("RCR LOADER")
 
-local Window = Luna:CreateWindow({
-   Name = "RCR LOADER",
-   Subtitle = "Auto-Update System",
-   LogoID = "4483362458",
-   LoadingEnabled = true,
-   LoadingTitle = "Checking for Updates",
-   LoadingSubtitle = "Fetching GitHub Data..."
-})
+local MainTab = Window:CreateTab("Execute")
 
-local Tab = Window:CreateTab({Name = "Execute", Icon = "play"})
+MainTab:CreateButton("LAUNCH RCR HUB", function()
+    local githubLink = "https://raw.githubusercontent.com/glrishikesh-maker/MyScripts/refs/heads/main/RCRHUB_MAIN.lua"
+    local cacheBuster = githubLink .. "?t=" .. os.time()
+    
+    local success, err = pcall(function()
+        loadstring(game:HttpGet(cacheBuster))()
+    end)
 
-Tab:CreateButton({
-   Name = "LAUNCH RCR HUB",
-   Description = "Loads the main hub from GitHub",
-   Callback = function()
-       local githubLink = "https://raw.githubusercontent.com/glrishikesh-maker/MyScripts/refs/heads/main/RCRHUB_MAIN.lua"
-       local cacheBuster = githubLink .. "?t=" .. os.time()
-       
-       local success, err = pcall(function()
-           loadstring(game:HttpGet(cacheBuster))()
-       end)
+    if success then
+        -- This closes the loader once the hub successfully starts
+        game:GetService("CoreGui"):FindFirstChild("Lucid"):Destroy()
+    else
+        warn("RCR Loader Error: " .. tostring(err))
+    end
+end)
 
-       if success then
-           Window:Destroy()
-       else
-           Luna:Notification({
-               Title = "Fetch Error",
-               Content = "Could not reach GitHub. Check your internet.",
-               Time = 5
-           })
-       end
-   end
-})
-
-Luna:Notification({
-   Title = "System Ready",
-   Content = "Loader version 3.0 active.",
-   Time = 3
-})
-
-
-
-
-
+MainTab:CreateLabel("Version: 4.0 (Lucid)")
