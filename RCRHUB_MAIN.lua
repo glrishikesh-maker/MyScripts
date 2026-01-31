@@ -17,15 +17,24 @@ local Window = Rayfield:CreateWindow({
    KeySystem = false,
 })
 
--- Create the Tab
 local MainTab = Window:CreateTab("Home", 4483362458) 
 
--- 1. STRETCHED RES BUTTON (Executes the specific rawscripts link)
+MainTab:CreateButton({
+   Name = "fps booster",
+   Callback = function()
+       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))()
+       Rayfield:Notify({
+           Title = "FPS Booster",
+           Content = "Performance settings applied!",
+           Duration = 3,
+       })
+   end,
+})
+
 MainTab:CreateButton({
    Name = "stretched res",
    Callback = function()
        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
-       
        Rayfield:Notify({
            Title = "Resolution",
            Content = "Stretched Res & FOV Loaded!",
@@ -34,7 +43,6 @@ MainTab:CreateButton({
    end,
 })
 
--- 2. MODERN Execution Button
 MainTab:CreateButton({
    Name = "MODERN",
    Callback = function()
@@ -42,7 +50,6 @@ MainTab:CreateButton({
    end,
 })
 
--- 3. xorfee Execution Button
 MainTab:CreateButton({
    Name = "xorfee",
    Callback = function()
@@ -63,7 +70,6 @@ MainTab:CreateButton({
    end,
 })
 
--- 4. nosniy Execution Button
 MainTab:CreateButton({
    Name = "nosniy",
    Callback = function()
@@ -84,7 +90,6 @@ MainTab:CreateButton({
    end,
 })
 
--- 5. yabujin Execution Button
 MainTab:CreateButton({
    Name = "yabujin",
    Callback = function()
@@ -92,14 +97,12 @@ MainTab:CreateButton({
    end,
 })
 
--- 6. Discord Button
 MainTab:CreateButton({
    Name = "Discord",
    Callback = function()
        if (setclipboard) then
            setclipboard("https://discord.gg/zeCVjkB29y")
        end
-       
        Rayfield:Notify({
            Title = "Discord",
            Content = "Copied link to clipboard!",
@@ -113,4 +116,3 @@ Rayfield:Notify({
    Content = "Hub Successfully Loaded",
    Duration = 3,
 })
-
