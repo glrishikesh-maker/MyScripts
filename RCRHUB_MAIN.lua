@@ -3,7 +3,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
    Name = "RCR HUB",
    LoadingTitle = "RCR System",
-   LoadingSubtitle = "by gold3en_rishi",
+   LoadingSubtitle = "by me",
    ConfigurationSaving = { Enabled = false },
    Discord = {
       Enabled = true,
@@ -33,6 +33,13 @@ MainTab:CreateButton({
 })
 
 MainTab:CreateSection("Executors")
+
+MainTab:CreateButton({
+   Name = "z3us",
+   Callback = function()
+       loadstring(game:HttpGet(('https://raw.githubusercontent.com/blackowl1231/ZYPHERION/refs/heads/main/main.lua')))()
+   end,
+})
 
 MainTab:CreateButton({
    Name = "MODERN",
