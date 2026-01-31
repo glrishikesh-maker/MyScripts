@@ -24,11 +24,6 @@ MainTab:CreateButton({
    Name = "fps booster",
    Callback = function()
        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))()
-       Rayfield:Notify({
-           Title = "FPS Booster",
-           Content = "Performance settings applied!",
-           Duration = 3,
-       })
    end,
 })
 
@@ -36,11 +31,6 @@ MainTab:CreateButton({
    Name = "stretched res",
    Callback = function()
        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
-       Rayfield:Notify({
-           Title = "Resolution",
-           Content = "Stretched Res & FOV Loaded!",
-           Duration = 3,
-       })
    end,
 })
 
@@ -98,39 +88,28 @@ MainTab:CreateButton({
    end,
 })
 
+AimTab:CreateButton({
+   Name = "Execute Simple Silent Aim",
+   Callback = function()
+       local success, err = pcall(function()
+           loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Silent-Aim/main/Resources/Scripts/Main.lua"))()
+       end)
+       
+       if not success then
+           Rayfield:Notify({
+               Title = "Error",
+               Content = "Executor is too weak for this script.",
+               Duration = 5
+           })
+       end
+   end,
+})
+
 MainTab:CreateButton({
    Name = "Discord",
    Callback = function()
-       if (setclipboard) then
-           setclipboard("https://discord.gg/zeCVjkB29y")
-       end
-       Rayfield:Notify({
-           Title = "Discord",
-           Content = "Copied link to clipboard!",
-           Duration = 5,
-       })
+       if (setclipboard) then setclipboard("https://discord.gg/zeCVjkB29y") end
    end,
 })
 
-AimTab:CreateSection("Silent Aim")
-
-AimTab:CreateButton({
-   Name = "Execute Universal Silent Aim",
-   Callback = function()
-       -- Switched to a more stable, working link
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/Averiias/Universal-SilentAim/main/main.lua"))()
-       
-       Rayfield:Notify({
-           Title = "Success",
-           Content = "Silent Aim Menu should appear!",
-           Duration = 5,
-       })
-   end,
-})
-
-Rayfield:Notify({
-   Title = "RCR HUB",
-   Content = "Hub Successfully Loaded",
-   Duration = 3,
-})
 
