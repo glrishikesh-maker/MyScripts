@@ -1,120 +1,71 @@
-local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/skatbr/Luna/main/Source.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/lucid.lua"))()
+local Window = Library:CreateWindow("RCR HUB")
 
-local Window = Luna:CreateWindow({
-   Name = "RCR HUB",
-   Subtitle = "by me",
-   LogoID = "4483362458",
-   LoadingEnabled = true,
-   LoadingTitle = "RCR System",
-   LoadingSubtitle = "Preparing Hub..."
-})
+local MainTab = Window:CreateTab("Home")
+local VisualTab = Window:CreateTab("Visuals")
 
-local MainTab = Window:CreateTab({Name = "Home", Icon = "home"})
-local VisualTab = Window:CreateTab({Name = "Visuals", Icon = "eye"})
+-- HOME TAB
+MainTab:CreateButton("fps booster", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))()
+end)
 
-MainTab:CreateButton({
-   Name = "fps booster",
-   Description = "Optimizes performance",
-   Callback = function()
-       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))()
-   end
-})
+MainTab:CreateButton("stretched res", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
+end)
 
-MainTab:CreateButton({
-   Name = "stretched res",
-   Description = "Change FOV and Res",
-   Callback = function()
-       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
-   end
-})
+MainTab:CreateButton("MODERN", function()
+    loadstring(game:HttpGet('https://exploit.plus/Loader'))()
+end)
 
-MainTab:CreateButton({
-   Name = "MODERN",
-   Callback = function()
-       loadstring(game:HttpGet('https://exploit.plus/Loader'))()
-   end
-})
+MainTab:CreateButton("xorfee", function()
+    getgenv().Config = {
+        victim = 716661842,
+        helper = "",
+        level = 979,
+        streak = 1927,
+        elo = 92802829228922892829272,
+        keys = 0,
+        premium = true,
+        verified = false,
+        unlockall = true,
+        platform = "DESKTOP",
+        join = "discord.gg/rivalscomp"
+    }
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
+end)
 
-MainTab:CreateButton({
-   Name = "xorfee",
-   Callback = function()
-       getgenv().Config = {
-           victim = 716661842,
-           helper = "",
-           level = 979,
-           streak = 1927,
-           elo = 92802829228922892829272,
-           keys = 0,
-           premium = true,
-           verified = false,
-           unlockall = true,
-           platform = "DESKTOP",
-           join = "discord.gg/rivalscomp"
-       }
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-   end
-})
+MainTab:CreateButton("nosniy", function()
+    getgenv().Config = {
+        victim = 20349956,
+        helper = "",
+        level = 1126,
+        streak = 1927,
+        elo = 92802829228922892829272,
+        keys = 1000,
+        premium = true,
+        verified = false,
+        unlockall = true,
+        platform = "DESKTOP",
+        join = "discord.gg/rivalscomp"
+    }
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
+end)
 
-MainTab:CreateButton({
-   Name = "nosniy",
-   Callback = function()
-       getgenv().Config = {
-           victim = 20349956,
-           helper = "",
-           level = 1126,
-           streak = 1927,
-           elo = 92802829228922892829272,
-           keys = 1000,
-           premium = true,
-           verified = false,
-           unlockall = true,
-           platform = "DESKTOP",
-           join = "discord.gg/rivalscomp"
-       }
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-   end
-})
+MainTab:CreateButton("yabujin", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/yashitcrack.lua"))()
+end)
 
-MainTab:CreateButton({
-   Name = "yabujin",
-   Callback = function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/yashitcrack.lua"))()
-   end
-})
+MainTab:CreateButton("Discord", function()
+    if setclipboard then setclipboard("https://discord.gg/zeCVjkB29y") end
+end)
 
-MainTab:CreateButton({
-   Name = "Discord",
-   Callback = function()
-       if setclipboard then setclipboard("https://discord.gg/zeCVjkB29y") end
-       Luna:Notification({
-           Title = "Discord",
-           Content = "Link copied to clipboard!",
-           Time = 3
-       })
-   end
-})
+-- VISUALS TAB
+VisualTab:CreateButton("Universal ESP", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/Main.lua"))()
+end)
 
-VisualTab:CreateButton({
-   Name = "Universal ESP",
-   Description = "See players through walls",
-   Callback = function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/Main.lua"))()
-   end
-})
-
-VisualTab:CreateButton({
-   Name = "FullBright",
-   Description = "Removes shadows and makes everything bright",
-   Callback = function()
-       game:GetService("Lighting").Brightness = 2
-       game:GetService("Lighting").ClockTime = 14
-       game:GetService("Lighting").FogEnd = 100000
-       game:GetService("Lighting").GlobalShadows = false
-   end
-})
-
-Luna:Notification({
-   Title = "RCR HUB",
-   Content = "Hub Loaded Successfully!",
-   Time = 5
-})
+VisualTab:CreateButton("FullBright", function()
+    game:GetService("Lighting").Brightness = 2
+    game:GetService("Lighting").ClockTime = 14
+    game:GetService("Lighting").GlobalShadows = false
+end)
