@@ -3,23 +3,15 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
    Name = "RCR HUB",
    LoadingTitle = "RCR HUB Loading...",
-   LoadingSubtitle = "by me",
-   ConfigurationSaving = {
-      Enabled = true,
-      FolderName = "RCR_Hub_Configs",
-      FileName = "RCRHub"
-   },
-   Discord = {
-      Enabled = true,
-      Invite = "zeCVjkB29y",
-      RememberJoins = true
-   },
+   LoadingSubtitle = "Safe Mode Active",
+   ConfigurationSaving = { Enabled = false },
    KeySystem = false,
 })
 
 local MainTab = Window:CreateTab("Home", 4483362458) 
-local AimTab = Window:CreateTab("Silent Aim", 4483362458)
+local AimTab = Window:CreateTab("Combat", 4483362458)
 
+-- HOME TAB BUTTONS
 MainTab:CreateButton({
    Name = "fps booster",
    Callback = function()
@@ -34,103 +26,46 @@ MainTab:CreateButton({
    end,
 })
 
-MainTab:CreateButton({
-   Name = "MODERN",
-   Callback = function()
-       loadstring(game:HttpGet('https://exploit.plus/Loader'))()
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "xorfee",
-   Callback = function()
-       getgenv().Config = {
-           victim = 716661842,
-           helper = "",
-           level = 979,
-           streak = 1927,
-           elo = 92802829228922892829272,
-           keys = 0,
-           premium = true,
-           verified = false,
-           unlockall = true,
-           platform = "DESKTOP",
-           join = "discord.gg/rivalscomp"
-       }
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "nosniy",
-   Callback = function()
-       getgenv().Config = {
-           victim = 20349956,
-           helper = "",
-           level = 1126,
-           streak = 1927,
-           elo = 92802829228922892829272,
-           keys = 1000,
-           premium = true,
-           verified = false,
-           unlockall = true,
-           platform = "DESKTOP",
-           join = "discord.gg/rivalscomp"
-       }
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "yabujin",
-   Callback = function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/yashitcrack.lua"))()
-   end,
-})
-
+-- COMBAT TAB (SAFE AIMBOT)
 AimTab:CreateButton({
-   Name = "Activate Silent Aim",
+   Name = "Smooth Aim Assist",
    Callback = function()
-       -- Built-in Simple Silent Aim (No external download)
        local Players = game:GetService("Players")
        local LocalPlayer = Players.LocalPlayer
-       local Mouse = LocalPlayer:GetMouse()
+       local RunService = game:GetService("RunService")
+       local UserInputService = game:GetService("UserInputService")
 
-       local function GetClosestPlayer()
-           local Target = nil
-           local Distance = math.huge
+       local function GetClosest()
+           local target = nil
+           local dist = math.huge
            for _, v in pairs(Players:GetPlayers()) do
-               if v ~= LocalPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-                   local Pos, OnScreen = game.Workspace.CurrentCamera:WorldToScreenPoint(v.Character.HumanoidRootPart.Position)
-                   if OnScreen then
-                       local MouseDist = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(Pos.X, Pos.Y)).Magnitude
-                       if MouseDist < Distance then
-                           Target = v
-                           Distance = MouseDist
+               if v ~= LocalPlayer and v.Character and v.Character:FindFirstChild("Head") then
+                   local pos, onScreen = workspace.CurrentCamera:WorldToScreenPoint(v.Character.Head.Position)
+                   if onScreen then
+                       local mousePos = UserInputService:GetMouseLocation()
+                       local magnitude = (Vector2.new(pos.X, pos.Y) - mousePos).Magnitude
+                       if magnitude < dist then
+                           target = v
+                           dist = magnitude
                        end
                    end
                end
            end
-           return Target
+           return target
        end
 
-       local RawMeta = getrawmetatable(game)
-       setreadonly(RawMeta, false)
-       local OldNamecall = RawMeta.__namecall
-
-       RawMeta.__namecall = newcclosure(function(Self, ...)
-           local Args = {...}
-           local Method = getnamecallmethod()
-           if Method == "FindPartOnRayWithIgnoreList" and not checkcaller() then
-               local T = GetClosestPlayer()
-               if T and T.Character and T.Character:FindFirstChild("Head") then
-                   return T.Character.Head, T.Character.Head.Position, Vector3.new(0,0,0), Enum.Material.Plastic
+       -- Connection to follow the player
+       RunService.RenderStepped:Connect(function()
+           if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then -- Holds Right Click
+               local target = GetClosest()
+               if target and target.Character then
+                   local cam = workspace.CurrentCamera
+                   cam.CFrame = CFrame.new(cam.CFrame.Position, target.Character.Head.Position)
                end
            end
-           return OldNamecall(Self, unpack(Args))
        end)
-       
-       Rayfield:Notify({Title = "RCR", Content = "Silent Aim Active", Duration = 3})
+
+       Rayfield:Notify({Title = "RCR", Content = "Aim Assist Loaded! Hold Right-Click to use.", Duration = 5})
    end,
 })
 
