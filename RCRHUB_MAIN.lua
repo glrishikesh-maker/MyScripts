@@ -18,6 +18,7 @@ local Window = Rayfield:CreateWindow({
 })
 
 local MainTab = Window:CreateTab("Home", 4483362458) 
+local AimTab = Window:CreateTab("Silent Aim", 4483362458)
 
 MainTab:CreateButton({
    Name = "fps booster",
@@ -110,6 +111,22 @@ MainTab:CreateButton({
        })
    end,
 })
+
+AimTab:CreateSection("Universal Aimbot")
+
+AimTab:CreateButton({
+   Name = "Execute Silent Aim",
+   Callback = function()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/StayOnTop1/SilentAim/main/Script.lua"))()
+       Rayfield:Notify({
+           Title = "Silent Aim",
+           Content = "Universal Silent Aim Loaded!",
+           Duration = 5,
+       })
+   end,
+})
+
+AimTab:CreateLabel("Note: Press 'Q' or check UI to toggle after executing")
 
 Rayfield:Notify({
    Title = "RCR HUB",
