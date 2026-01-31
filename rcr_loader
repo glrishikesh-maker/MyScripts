@@ -89,19 +89,48 @@ MainTab:CreateButton({
 })
 
 AimTab:CreateButton({
-   Name = "Execute Simple Silent Aim",
+   Name = "Activate Silent Aim",
    Callback = function()
-       local success, err = pcall(function()
-           loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Silent-Aim/main/Resources/Scripts/Main.lua"))()
+       -- Built-in Simple Silent Aim (No external download)
+       local Players = game:GetService("Players")
+       local LocalPlayer = Players.LocalPlayer
+       local Mouse = LocalPlayer:GetMouse()
+
+       local function GetClosestPlayer()
+           local Target = nil
+           local Distance = math.huge
+           for _, v in pairs(Players:GetPlayers()) do
+               if v ~= LocalPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+                   local Pos, OnScreen = game.Workspace.CurrentCamera:WorldToScreenPoint(v.Character.HumanoidRootPart.Position)
+                   if OnScreen then
+                       local MouseDist = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(Pos.X, Pos.Y)).Magnitude
+                       if MouseDist < Distance then
+                           Target = v
+                           Distance = MouseDist
+                       end
+                   end
+               end
+           end
+           return Target
+       end
+
+       local RawMeta = getrawmetatable(game)
+       setreadonly(RawMeta, false)
+       local OldNamecall = RawMeta.__namecall
+
+       RawMeta.__namecall = newcclosure(function(Self, ...)
+           local Args = {...}
+           local Method = getnamecallmethod()
+           if Method == "FindPartOnRayWithIgnoreList" and not checkcaller() then
+               local T = GetClosestPlayer()
+               if T and T.Character and T.Character:FindFirstChild("Head") then
+                   return T.Character.Head, T.Character.Head.Position, Vector3.new(0,0,0), Enum.Material.Plastic
+               end
+           end
+           return OldNamecall(Self, unpack(Args))
        end)
        
-       if not success then
-           Rayfield:Notify({
-               Title = "Error",
-               Content = "Executor is too weak for this script.",
-               Duration = 5
-           })
-       end
+       Rayfield:Notify({Title = "RCR", Content = "Silent Aim Active", Duration = 3})
    end,
 })
 
@@ -111,5 +140,6 @@ MainTab:CreateButton({
        if (setclipboard) then setclipboard("https://discord.gg/zeCVjkB29y") end
    end,
 })
+
 
 
