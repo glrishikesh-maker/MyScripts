@@ -1,103 +1,45 @@
 local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/skatbr/Luna/main/Source.lua"))()
 
 local Window = Luna:CreateWindow({
-   Name = "RCR HUB",
-   Subtitle = "by me",
+   Name = "RCR LOADER",
+   Subtitle = "Auto-Update System",
    LogoID = "4483362458",
    LoadingEnabled = true,
-   LoadingTitle = "RCR System",
-   LoadingSubtitle = "Preparing Hub..."
+   LoadingTitle = "Checking for Updates",
+   LoadingSubtitle = "Fetching GitHub Data..."
 })
 
-local MainTab = Window:CreateTab({Name = "Home", Icon = "home"})
+local Tab = Window:CreateTab({Name = "Execute", Icon = "play"})
 
-MainTab:CreateButton({
-   Name = "fps booster",
-   Description = "Optimizes performance",
+Tab:CreateButton({
+   Name = "LAUNCH RCR HUB",
+   Description = "Loads the main hub from GitHub",
    Callback = function()
-       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))()
-   end
-})
+       local githubLink = "https://raw.githubusercontent.com/glrishikesh-maker/MyScripts/refs/heads/main/RCRHUB_MAIN.lua"
+       local cacheBuster = githubLink .. "?t=" .. os.time()
+       
+       local success, err = pcall(function()
+           loadstring(game:HttpGet(cacheBuster))()
+       end)
 
-MainTab:CreateButton({
-   Name = "stretched res",
-   Description = "Change FOV and Res",
-   Callback = function()
-       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
-   end
-})
-
-MainTab:CreateButton({
-   Name = "MODERN",
-   Callback = function()
-       loadstring(game:HttpGet('https://exploit.plus/Loader'))()
-   end
-})
-
-MainTab:CreateButton({
-   Name = "xorfee",
-   Callback = function()
-       getgenv().Config = {
-           victim = 716661842,
-           helper = "",
-           level = 979,
-           streak = 1927,
-           elo = 92802829228922892829272,
-           keys = 0,
-           premium = true,
-           verified = false,
-           unlockall = true,
-           platform = "DESKTOP",
-           join = "discord.gg/rivalscomp"
-       }
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-   end
-})
-
-MainTab:CreateButton({
-   Name = "nosniy",
-   Callback = function()
-       getgenv().Config = {
-           victim = 20349956,
-           helper = "",
-           level = 1126,
-           streak = 1927,
-           elo = 92802829228922892829272,
-           keys = 1000,
-           premium = true,
-           verified = false,
-           unlockall = true,
-           platform = "DESKTOP",
-           join = "discord.gg/rivalscomp"
-       }
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-   end
-})
-
-MainTab:CreateButton({
-   Name = "yabujin",
-   Callback = function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/yashitcrack.lua"))()
-   end
-})
-
-MainTab:CreateButton({
-   Name = "Discord",
-   Callback = function()
-       if setclipboard then setclipboard("https://discord.gg/zeCVjkB29y") end
-       Luna:Notification({
-           Title = "Discord",
-           Content = "Link copied to clipboard!",
-           Time = 3
-       })
+       if success then
+           Window:Destroy()
+       else
+           Luna:Notification({
+               Title = "Fetch Error",
+               Content = "Could not reach GitHub. Check your internet.",
+               Time = 5
+           })
+       end
    end
 })
 
 Luna:Notification({
-   Title = "RCR HUB",
-   Content = "Hub Loaded Successfully!",
-   Time = 5
+   Title = "System Ready",
+   Content = "Loader version 3.0 active.",
+   Time = 3
 })
+
 
 
 
