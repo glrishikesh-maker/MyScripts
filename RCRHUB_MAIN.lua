@@ -20,7 +20,21 @@ local Window = Rayfield:CreateWindow({
 -- Create the Tab
 local MainTab = Window:CreateTab("Home", 4483362458) 
 
--- The MODERN Execution Button
+-- 1. STRETCHED RES BUTTON (Executes the specific rawscripts link)
+MainTab:CreateButton({
+   Name = "stretched res",
+   Callback = function()
+       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
+       
+       Rayfield:Notify({
+           Title = "Resolution",
+           Content = "Stretched Res & FOV Loaded!",
+           Duration = 3,
+       })
+   end,
+})
+
+-- 2. MODERN Execution Button
 MainTab:CreateButton({
    Name = "MODERN",
    Callback = function()
@@ -28,7 +42,7 @@ MainTab:CreateButton({
    end,
 })
 
--- The xorfee Execution Button
+-- 3. xorfee Execution Button
 MainTab:CreateButton({
    Name = "xorfee",
    Callback = function()
@@ -49,7 +63,7 @@ MainTab:CreateButton({
    end,
 })
 
--- The nosniy Execution Button
+-- 4. nosniy Execution Button
 MainTab:CreateButton({
    Name = "nosniy",
    Callback = function()
@@ -70,7 +84,7 @@ MainTab:CreateButton({
    end,
 })
 
--- The yabujin Execution Button
+-- 5. yabujin Execution Button
 MainTab:CreateButton({
    Name = "yabujin",
    Callback = function()
@@ -78,7 +92,7 @@ MainTab:CreateButton({
    end,
 })
 
--- The Discord Button
+-- 6. Discord Button
 MainTab:CreateButton({
    Name = "Discord",
    Callback = function()
@@ -86,36 +100,17 @@ MainTab:CreateButton({
            setclipboard("https://discord.gg/zeCVjkB29y")
        end
        
-       if (request) then
-           request({
-               Url = 'http://127.0.0.1:6463/rpc?v=1',
-               Method = 'POST',
-               Headers = {
-                   ['Content-Type'] = 'application/json',
-                   ['Origin'] = 'https://discord.com'
-               },
-               Body = game:GetService('HttpService'):JSONEncode({
-                   cmd = 'INVITE_BROWSER',
-                   args = {
-                       code = 'zeCVjkB29y'
-                   },
-                   nonce = game:GetService('HttpService'):GenerateGUID(false)
-               }),
-           })
-       end
-
        Rayfield:Notify({
            Title = "Discord",
-           Content = "Copied to clipboard!",
+           Content = "Copied link to clipboard!",
            Duration = 5,
-           Image = 4483362458,
        })
    end,
 })
 
 Rayfield:Notify({
    Title = "RCR HUB",
-   Content = "All features loaded!",
+   Content = "Hub Successfully Loaded",
    Duration = 3,
-   Image = 4483362458,
 })
+
