@@ -1,22 +1,30 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/lucid.lua"))()
-local Window = Library:CreateWindow("RCR LOADER")
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local MainTab = Window:CreateTab("Execute")
+local Window = Rayfield:CreateWindow({
+   Name = "RCR LOADER",
+   LoadingTitle = "RCR System",
+   LoadingSubtitle = "Checking GitHub...",
+   ConfigurationSaving = { Enabled = false },
+   KeySystem = false,
+})
 
-MainTab:CreateButton("LAUNCH RCR HUB", function()
-    local githubLink = "https://raw.githubusercontent.com/glrishikesh-maker/MyScripts/refs/heads/main/RCRHUB_MAIN.lua"
-    local cacheBuster = githubLink .. "?t=" .. os.time()
-    
-    local success, err = pcall(function()
-        loadstring(game:HttpGet(cacheBuster))()
-    end)
+local Tab = Window:CreateTab("Launch", 4483362458)
 
-    if success then
-        -- This closes the loader once the hub successfully starts
-        game:GetService("CoreGui"):FindFirstChild("Lucid"):Destroy()
-    else
-        warn("RCR Loader Error: " .. tostring(err))
-    end
-end)
+Tab:CreateButton({
+   Name = "EXECUTE RCR HUB",
+   Callback = function()
+       local githubLink = "https://raw.githubusercontent.com/glrishikesh-maker/MyScripts/refs/heads/main/RCRHUB_MAIN.lua"
+       local cacheBuster = githubLink .. "?t=" .. os.time()
+       
+       local success, err = pcall(function()
+           loadstring(game:HttpGet(cacheBuster))()
+       end)
 
-MainTab:CreateLabel("Version: 4.0 (Lucid)")
+       if success then
+           Rayfield:Notify({Title = "Success", Content = "Loading Hub...", Duration = 3})
+           Rayfield:Destroy()
+       else
+           warn("Loader Error: " .. tostring(err))
+       end
+   end,
+})
