@@ -1,54 +1,38 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/skatbr/Luna/main/Source.lua"))()
 
-local Window = Rayfield:CreateWindow({
+local Window = Luna:CreateWindow({
    Name = "RCR HUB",
-   LoadingTitle = "RCR HUB Loading...",
-   LoadingSubtitle = "by me",
-   ConfigurationSaving = {
-      Enabled = true,
-      FolderName = "RCR_Hub_Configs",
-      FileName = "RCRHub"
-   },
-   Discord = {
-      Enabled = true,
-      Invite = "zeCVjkB29y",
-      RememberJoins = true
-   },
-   KeySystem = false,
+   Subtitle = "by me",
+   LogoID = "4483362458",
+   LoadingEnabled = true,
+   LoadingTitle = "RCR System",
+   LoadingSubtitle = "Preparing Hub..."
 })
 
-local MainTab = Window:CreateTab("Home", 4483362458) 
-local AimTab = Window:CreateTab("Silent Aim", 4483362458)
+local MainTab = Window:CreateTab({Name = "Home", Icon = "home"})
+local VisualTab = Window:CreateTab({Name = "Visuals", Icon = "eye"})
 
 MainTab:CreateButton({
    Name = "fps booster",
+   Description = "Optimizes performance",
    Callback = function()
        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))()
-       Rayfield:Notify({
-           Title = "FPS Booster",
-           Content = "Performance settings applied!",
-           Duration = 3,
-       })
-   end,
+   end
 })
 
 MainTab:CreateButton({
    Name = "stretched res",
+   Description = "Change FOV and Res",
    Callback = function()
        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
-       Rayfield:Notify({
-           Title = "Resolution",
-           Content = "Stretched Res & FOV Loaded!",
-           Duration = 3,
-       })
-   end,
+   end
 })
 
 MainTab:CreateButton({
    Name = "MODERN",
    Callback = function()
        loadstring(game:HttpGet('https://exploit.plus/Loader'))()
-   end,
+   end
 })
 
 MainTab:CreateButton({
@@ -68,7 +52,7 @@ MainTab:CreateButton({
            join = "discord.gg/rivalscomp"
        }
        loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-   end,
+   end
 })
 
 MainTab:CreateButton({
@@ -88,48 +72,49 @@ MainTab:CreateButton({
            join = "discord.gg/rivalscomp"
        }
        loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-   end,
+   end
 })
 
 MainTab:CreateButton({
    Name = "yabujin",
    Callback = function()
        loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/yashitcrack.lua"))()
-   end,
+   end
 })
 
 MainTab:CreateButton({
    Name = "Discord",
    Callback = function()
-       if (setclipboard) then
-           setclipboard("https://discord.gg/zeCVjkB29y")
-       end
-       Rayfield:Notify({
+       if setclipboard then setclipboard("https://discord.gg/zeCVjkB29y") end
+       Luna:Notification({
            Title = "Discord",
-           Content = "Copied link to clipboard!",
-           Duration = 5,
+           Content = "Link copied to clipboard!",
+           Time = 3
        })
-   end,
+   end
 })
 
-AimTab:CreateSection("Universal Aimbot")
-
-AimTab:CreateButton({
-   Name = "Execute Silent Aim",
+VisualTab:CreateButton({
+   Name = "Universal ESP",
+   Description = "See players through walls",
    Callback = function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/StayOnTop1/SilentAim/main/Script.lua"))()
-       Rayfield:Notify({
-           Title = "Silent Aim",
-           Content = "Universal Silent Aim Loaded!",
-           Duration = 5,
-       })
-   end,
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/Main.lua"))()
+   end
 })
 
-AimTab:CreateLabel("Note: Press 'Q' or check UI to toggle after executing")
+VisualTab:CreateButton({
+   Name = "FullBright",
+   Description = "Removes shadows and makes everything bright",
+   Callback = function()
+       game:GetService("Lighting").Brightness = 2
+       game:GetService("Lighting").ClockTime = 14
+       game:GetService("Lighting").FogEnd = 100000
+       game:GetService("Lighting").GlobalShadows = false
+   end
+})
 
-Rayfield:Notify({
+Luna:Notification({
    Title = "RCR HUB",
-   Content = "Hub Successfully Loaded",
-   Duration = 3,
+   Content = "Hub Loaded Successfully!",
+   Time = 5
 })
