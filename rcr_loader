@@ -1,80 +1,104 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/skatbr/Luna/main/Source.lua"))()
 
-local Window = Rayfield:CreateWindow({
+local Window = Luna:CreateWindow({
    Name = "RCR HUB",
-   LoadingTitle = "RCR HUB Loading...",
-   LoadingSubtitle = "Safe Mode Active",
-   ConfigurationSaving = { Enabled = false },
-   KeySystem = false,
+   Subtitle = "by me",
+   LogoID = "4483362458",
+   LoadingEnabled = true,
+   LoadingTitle = "RCR System",
+   LoadingSubtitle = "Preparing Hub..."
 })
 
-local MainTab = Window:CreateTab("Home", 4483362458) 
-local AimTab = Window:CreateTab("Combat", 4483362458)
+local MainTab = Window:CreateTab({Name = "Home", Icon = "home"})
 
--- HOME TAB BUTTONS
 MainTab:CreateButton({
    Name = "fps booster",
+   Description = "Optimizes performance",
    Callback = function()
        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))()
-   end,
+   end
 })
 
 MainTab:CreateButton({
    Name = "stretched res",
+   Description = "Change FOV and Res",
    Callback = function()
        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
-   end,
+   end
 })
 
--- COMBAT TAB (SAFE AIMBOT)
-AimTab:CreateButton({
-   Name = "Smooth Aim Assist",
+MainTab:CreateButton({
+   Name = "MODERN",
    Callback = function()
-       local Players = game:GetService("Players")
-       local LocalPlayer = Players.LocalPlayer
-       local RunService = game:GetService("RunService")
-       local UserInputService = game:GetService("UserInputService")
+       loadstring(game:HttpGet('https://exploit.plus/Loader'))()
+   end
+})
 
-       local function GetClosest()
-           local target = nil
-           local dist = math.huge
-           for _, v in pairs(Players:GetPlayers()) do
-               if v ~= LocalPlayer and v.Character and v.Character:FindFirstChild("Head") then
-                   local pos, onScreen = workspace.CurrentCamera:WorldToScreenPoint(v.Character.Head.Position)
-                   if onScreen then
-                       local mousePos = UserInputService:GetMouseLocation()
-                       local magnitude = (Vector2.new(pos.X, pos.Y) - mousePos).Magnitude
-                       if magnitude < dist then
-                           target = v
-                           dist = magnitude
-                       end
-                   end
-               end
-           end
-           return target
-       end
+MainTab:CreateButton({
+   Name = "xorfee",
+   Callback = function()
+       getgenv().Config = {
+           victim = 716661842,
+           helper = "",
+           level = 979,
+           streak = 1927,
+           elo = 92802829228922892829272,
+           keys = 0,
+           premium = true,
+           verified = false,
+           unlockall = true,
+           platform = "DESKTOP",
+           join = "discord.gg/rivalscomp"
+       }
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
+   end
+})
 
-       -- Connection to follow the player
-       RunService.RenderStepped:Connect(function()
-           if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then -- Holds Right Click
-               local target = GetClosest()
-               if target and target.Character then
-                   local cam = workspace.CurrentCamera
-                   cam.CFrame = CFrame.new(cam.CFrame.Position, target.Character.Head.Position)
-               end
-           end
-       end)
+MainTab:CreateButton({
+   Name = "nosniy",
+   Callback = function()
+       getgenv().Config = {
+           victim = 20349956,
+           helper = "",
+           level = 1126,
+           streak = 1927,
+           elo = 92802829228922892829272,
+           keys = 1000,
+           premium = true,
+           verified = false,
+           unlockall = true,
+           platform = "DESKTOP",
+           join = "discord.gg/rivalscomp"
+       }
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
+   end
+})
 
-       Rayfield:Notify({Title = "RCR", Content = "Aim Assist Loaded! Hold Right-Click to use.", Duration = 5})
-   end,
+MainTab:CreateButton({
+   Name = "yabujin",
+   Callback = function()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/yashitcrack.lua"))()
+   end
 })
 
 MainTab:CreateButton({
    Name = "Discord",
    Callback = function()
-       if (setclipboard) then setclipboard("https://discord.gg/zeCVjkB29y") end
-   end,
+       if setclipboard then setclipboard("https://discord.gg/zeCVjkB29y") end
+       Luna:Notification({
+           Title = "Discord",
+           Content = "Link copied to clipboard!",
+           Time = 3
+       })
+   end
 })
+
+Luna:Notification({
+   Title = "RCR HUB",
+   Content = "Hub Loaded Successfully!",
+   Time = 5
+})
+
 
 
 
