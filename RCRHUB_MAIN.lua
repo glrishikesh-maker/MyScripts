@@ -1,7 +1,7 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "RCR HUB",
+   Name = "RIVALS || RCRHUB || FREE",
    LoadingTitle = "RCR System",
    LoadingSubtitle = "by me",
    ConfigurationSaving = { Enabled = false },
@@ -38,7 +38,6 @@ MainTab:CreateButton({
 
 MainTab:CreateSection("Utilities")
 
--- This button specifically shows the toggle key as requested
 MainTab:CreateButton({
    Name = "MENU TOGGLE: [ K ]",
    Callback = function()
@@ -151,7 +150,6 @@ VisualTab:CreateButton({
    end,
 })
 
--- KEYBIND LOGIC
 local UserInputService = game:GetService("UserInputService")
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
    if not gameProcessed and input.KeyCode == Enum.KeyCode.K then
