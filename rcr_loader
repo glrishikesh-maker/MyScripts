@@ -5,7 +5,6 @@ end)
 
 if not success or not Rayfield then
     warn("RCR FATAL ERROR: Rayfield library could not be reached.")
-    print("Error details: ", Rayfield)
     return
 end
 
