@@ -39,6 +39,13 @@ MainTab:CreateButton({
 MainTab:CreateSection("Utilities")
 
 MainTab:CreateButton({
+   Name = "Skin Changer",
+   Callback = function()
+       loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-Skin-Changer-74896"))()
+   end,
+})
+
+MainTab:CreateButton({
    Name = "MENU TOGGLE: [ K ]",
    Callback = function()
        Rayfield:Notify({Title = "Info", Content = "Press 'K' to hide or show this menu!", Duration = 3})
