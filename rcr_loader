@@ -1,37 +1,40 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+Rayfield:Notify({
+    Title = "RCR SYSTEM", 
+    Content = "Loader by gold3en_rishi", 
+    Duration = 4
+})
+
 local Window = Rayfield:CreateWindow({
-   Name = "RCR LOADER",
-   LoadingTitle = "RCR System",
-   LoadingSubtitle = "Checking GitHub...",
+   Name = "RCR LOADER | gold3en_rishi",
+   LoadingTitle = "Awaiting Input...",
+   LoadingSubtitle = "RIVALS || RCRHUB",
    ConfigurationSaving = { Enabled = false },
    KeySystem = false,
 })
 
-local Tab = Window:CreateTab("Launch", 4483362458)
+local Tab = Window:CreateTab("Main", 4483362458)
 
 Tab:CreateButton({
-   Name = "EXECUTE RCR HUB",
+   Name = "EXECUTE RCR NOW",
    Callback = function()
-       -- Link to your GitHub file
        local githubLink = "https://raw.githubusercontent.com/glrishikesh-maker/MyScripts/refs/heads/main/RCRHUB_MAIN.lua"
-       -- The Cache Buster ensures you always get your NEWEST GitHub save
-       local cacheBuster = githubLink .. "?t=" .. os.time()
-       
        local success, err = pcall(function()
-           loadstring(game:HttpGet(cacheBuster))()
+           loadstring(game:HttpGet(githubLink .. "?t=" .. os.time()))()
        end)
 
        if success then
-           -- Destroys the loader menu so only the main hub remains
            Rayfield:Destroy()
        else
-           Rayfield:Notify({
-               Title = "Fetch Error",
-               Content = "GitHub link failed. Check your URL.",
-               Duration = 5
-           })
-           warn("Loader Error: " .. tostring(err))
+           warn("RCR Loader Error: " .. tostring(err))
        end
+   end,
+})
+
+Tab:CreateButton({
+   Name = "CLOSE LOADER",
+   Callback = function()
+       Rayfield:Destroy()
    end,
 })
