@@ -1,11 +1,11 @@
-getgenv().SecureMode = true -- Helps bypass executor restrictions
+getgenv().SecureMode = true
 local success, Rayfield = pcall(function()
     return loadstring(game:HttpGet('https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/main/source.lua'))()
 end)
 
 if not success or not Rayfield then
     warn("RCR FATAL ERROR: Rayfield library could not be reached.")
-    print("Error details: ", Rayfield) -- This shows the error in F9 console
+    print("Error details: ", Rayfield)
     return
 end
 
