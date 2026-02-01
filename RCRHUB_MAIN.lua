@@ -16,6 +16,29 @@ local Window = Rayfield:CreateWindow({
 local MainTab = Window:CreateTab("Home", 4483362458) 
 local VisualTab = Window:CreateTab("Visuals", 4483362458)
 
+MainTab:CreateSection("Bypass")
+
+MainTab:CreateButton({
+   Name = "Universal AC Bypass",
+   Callback = function()
+       -- Basic Universal Anti-Cheat Bypass
+       local gmt = getrawmetatable(game)
+       setreadonly(gmt, false)
+       local old = gmt.__namecall
+       
+       gmt.__namecall = newcclosure(function(self, ...)
+           local method = getnamecallmethod()
+           if method == "FireServer" and self.Name == "MainEvent" then
+               return -- Blocks common anti-cheat detection signals
+           end
+           return old(self, ...)
+       end)
+       
+       setreadonly(gmt, true)
+       Rayfield:Notify({Title = "Bypass", Content = "Universal Anti-Cheat Bypass Active", Duration = 5})
+   end,
+})
+
 MainTab:CreateSection("Utilities")
 
 MainTab:CreateButton({
@@ -125,6 +148,6 @@ VisualTab:CreateButton({
 
 Rayfield:Notify({
    Title = "RCR HUB",
-   Content = "Successfully Loaded",
+   Content = "Ready with AC Bypass",
    Duration = 5,
 })
