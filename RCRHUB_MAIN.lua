@@ -24,7 +24,6 @@ MainTab:CreateButton({
        local gmt = getrawmetatable(game)
        setreadonly(gmt, false)
        local old = gmt.__namecall
-       
        gmt.__namecall = newcclosure(function(self, ...)
            local method = getnamecallmethod()
            if method == "FireServer" and self.Name == "MainEvent" then
@@ -32,13 +31,20 @@ MainTab:CreateButton({
            end
            return old(self, ...)
        end)
-       
        setreadonly(gmt, true)
        Rayfield:Notify({Title = "Bypass", Content = "Universal Anti-Cheat Bypass Active", Duration = 5})
    end,
 })
 
 MainTab:CreateSection("Utilities")
+
+-- This button specifically shows the toggle key as requested
+MainTab:CreateButton({
+   Name = "MENU TOGGLE: [ K ]",
+   Callback = function()
+       Rayfield:Notify({Title = "Info", Content = "Press 'K' to hide or show this menu!", Duration = 3})
+   end,
+})
 
 MainTab:CreateButton({
    Name = "fps booster",
@@ -144,3 +150,11 @@ VisualTab:CreateButton({
        lighting.GlobalShadows = false
    end,
 })
+
+-- KEYBIND LOGIC
+local UserInputService = game:GetService("UserInputService")
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+   if not gameProcessed and input.KeyCode == Enum.KeyCode.K then
+       Window:Toggle()
+   end
+end)
