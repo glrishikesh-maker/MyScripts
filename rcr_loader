@@ -1,14 +1,17 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+getgenv().SecureMode = true -- Helps bypass executor restrictions
+local success, Rayfield = pcall(function()
+    return loadstring(game:HttpGet('https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/main/source.lua'))()
+end)
 
-Rayfield:Notify({
-    Title = "RCR SYSTEM", 
-    Content = "Loader by gold3en_rishi", 
-    Duration = 4
-})
+if not success or not Rayfield then
+    warn("RCR FATAL ERROR: Rayfield library could not be reached.")
+    print("Error details: ", Rayfield) -- This shows the error in F9 console
+    return
+end
 
 local Window = Rayfield:CreateWindow({
    Name = "RCR LOADER | gold3en_rishi",
-   LoadingTitle = "Awaiting Input...",
+   LoadingTitle = "Forcing Connection...",
    LoadingSubtitle = "RIVALS || RCRHUB",
    ConfigurationSaving = { Enabled = false },
    KeySystem = false,
@@ -20,14 +23,14 @@ Tab:CreateButton({
    Name = "EXECUTE RCR NOW",
    Callback = function()
        local githubLink = "https://raw.githubusercontent.com/glrishikesh-maker/MyScripts/refs/heads/main/RCRHUB_MAIN.lua"
-       local success, err = pcall(function()
+       local hubSuccess, hubErr = pcall(function()
            loadstring(game:HttpGet(githubLink .. "?t=" .. os.time()))()
        end)
 
-       if success then
+       if hubSuccess then
            Rayfield:Destroy()
        else
-           warn("RCR Loader Error: " .. tostring(err))
+           warn("Hub Error: " .. tostring(hubErr))
        end
    end,
 })
