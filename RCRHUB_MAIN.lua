@@ -16,27 +16,6 @@ local Window = Rayfield:CreateWindow({
 local MainTab = Window:CreateTab("Home", 4483362458) 
 local VisualTab = Window:CreateTab("Visuals", 4483362458)
 
-MainTab:CreateSection("Emergency")
-
-MainTab:CreateButton({
-   Name = "OFF ALL (Reset & Close)",
-   Callback = function()
-       local lighting = game:GetService("Lighting")
-       lighting.Brightness = 1
-       lighting.ClockTime = 12
-       lighting.FogEnd = 1000
-       lighting.GlobalShadows = true
-       getgenv().Config = nil
-       local player = game.Players.LocalPlayer
-       if player.Character and player.Character:FindFirstChild("Humanoid") then
-           player.Character.Humanoid.WalkSpeed = 16
-       end
-       Rayfield:Notify({Title = "RCR SYSTEM", Content = "Cleaning up and closing menu...", Duration = 3})
-       task.wait(1)
-       Rayfield:Destroy()
-   end,
-})
-
 MainTab:CreateSection("Bypass")
 
 MainTab:CreateButton({
@@ -54,24 +33,6 @@ MainTab:CreateButton({
        end)
        setreadonly(gmt, true)
        Rayfield:Notify({Title = "Bypass", Content = "Universal Anti-Cheat Bypass Active", Duration = 5})
-   end,
-})
-
-MainTab:CreateSection("Movement")
-
-MainTab:CreateSlider({
-   Name = "WalkSpeed",
-   Info = "Default speed is 16",
-   Range = {16, 200},
-   Increment = 1,
-   Suffix = " Speed",
-   CurrentValue = 16,
-   Flag = "WS_Slider",
-   Callback = function(Value)
-       local player = game.Players.LocalPlayer
-       if player.Character and player.Character:FindFirstChild("Humanoid") then
-           player.Character.Humanoid.WalkSpeed = Value
-       end
    end,
 })
 
@@ -98,23 +59,20 @@ MainTab:CreateButton({
    end,
 })
 
-MainTab:CreateButton({
-   Name = "Take the L (Emote Swap)",
-   Callback = function()
-       local ReplicatedStorage = game:GetService("ReplicatedStorage")
-       local EmotesFolder = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Emotes")
-       local shoulderBrush = EmotesFolder:FindFirstChild("Shoulder Brush")
-       local takeTheL = EmotesFolder:FindFirstChild("Take The L")
+MainTab:CreateSection("Movement")
 
-       if shoulderBrush and takeTheL then
-           local oldRequire
-           oldRequire = hookfunction(require, function(module)
-               if module == shoulderBrush then
-                   return require(takeTheL)
-               end
-               return oldRequire(module)
-           end)
-           Rayfield:Notify({Title = "Emote Active", Content = "Shoulder Brush now plays Take The L!", Duration = 5})
+MainTab:CreateSlider({
+   Name = "WalkSpeed",
+   Info = "Default speed is 16",
+   Range = {16, 200},
+   Increment = 1,
+   Suffix = " Speed",
+   CurrentValue = 16,
+   Flag = "WS_Slider",
+   Callback = function(Value)
+       local player = game.Players.LocalPlayer
+       if player.Character and player.Character:FindFirstChild("Humanoid") then
+           player.Character.Humanoid.WalkSpeed = Value
        end
    end,
 })
@@ -161,13 +119,6 @@ MainTab:CreateButton({
    end,
 })
 
-MainTab:CreateButton({
-   Name = "z3us",
-   Callback = function()
-       loadstring(game:HttpGet(('https://raw.githubusercontent.com/blackowl1231/ZYPHERION/refs/heads/main/main.lua')))()
-   end,
-})
-
 VisualTab:CreateSection("ESP & Lighting")
 
 VisualTab:CreateButton({
@@ -187,10 +138,3 @@ VisualTab:CreateButton({
        lighting.GlobalShadows = false
    end,
 })
-
-local UserInputService = game:GetService("UserInputService")
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-   if not gameProcessed and input.KeyCode == Enum.KeyCode.K then
-       Window:Toggle()
-   end
-end)
