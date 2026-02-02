@@ -2,7 +2,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
    Name = "RCR HUB || RIVALS || FREE",
-   LoadingTitle = "RCR System V4",
+   LoadingTitle = "RCR System V4.1",
    LoadingSubtitle = "by gold3en_rishi",
    ConfigurationSaving = { Enabled = false },
    KeySystem = false,
@@ -78,7 +78,29 @@ MainTab:CreateButton({Name = "MODERN (Ctrl to Open)", Callback = function() load
 MainTab:CreateButton({Name = "z3us", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/blackowl1231/ZYPHERION/refs/heads/main/main.lua'))() end})
 
 VisualTab:CreateSection("Visuals")
-VisualTab:CreateButton({Name = "Universal ESP", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/Main.lua"))() end})
+
+VisualTab:CreateButton({
+   Name = "Universal ESP (Fixed)",
+   Callback = function()
+       -- Better Universal ESP
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/reanimation/main/UniversalESP.lua"))()
+   end,
+})
+
+VisualTab:CreateButton({
+   Name = "Highlight ESP",
+   Callback = function()
+       -- Simple Highlight ESP for Rivals
+       for _, v in pairs(game.Players:GetPlayers()) do
+           if v ~= game.Players.LocalPlayer and v.Character then
+               local highlight = Instance.new("Highlight")
+               highlight.Parent = v.Character
+               highlight.FillColor = Color3.fromRGB(255, 0, 0)
+               highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+           end
+       end
+   end,
+})
 
 local UserInputService = game:GetService("UserInputService")
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
