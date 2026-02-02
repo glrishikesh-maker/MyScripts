@@ -31,7 +31,7 @@ MainTab:CreateButton({
            end)
            Rayfield:Notify({Title = "Emote Swapped", Content = "Shoulder Brush now executes Take the L!", Duration = 5})
        else
-           Rayfield:Notify({Title = "Error", Content = "Emotes not found! Make sure you have Shoulder Brush.", Duration = 5})
+           Rayfield:Notify({Title = "Error", Content = "Emotes not found!", Duration = 5})
        end
    end,
 })
@@ -51,6 +51,28 @@ MainTab:CreateButton({Name = "z3us", Callback = function() loadstring(game:HttpG
 MainTab:CreateButton({Name = "yabujin", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/yashitcrack.lua"))() end})
 
 MainTab:CreateSection("Spoofs")
+
+MainTab:CreateButton({
+   Name = "sync wu",
+   Callback = function()
+       getgenv().Config = {
+           victim = 1796383039,
+           helper = "",
+           level = 1242,
+           streak = 1927,
+           elo = 37899,
+           keys = 0,
+           premium = true,
+           verified = false,
+           unlockall = true,
+           platform = "DESKTOP",
+           join = "discord.gg/rivalscomp"
+       }
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
+       Rayfield:Notify({Title = "Spoof Loaded", Content = "Sync Wu profile applied!", Duration = 3})
+   end,
+})
+
 MainTab:CreateButton({Name = "slingshot", Callback = function() getgenv().Config = {victim = 719253194, level = 456, streak = 1927, elo = 0, keys = 1000, premium = true, verified = true, unlockall = true, platform = "DESKTOP", join = "discord.gg/rivalscomp"} loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))() end})
 MainTab:CreateButton({Name = "Jvke", Callback = function() getgenv().Config = {victim = 5041464410, level = 979, streak = 23530, elo = 92802829228922892829272, keys = 0, premium = true, verified = false, unlockall = true, platform = "DESKTOP", join = "discord.gg/rivalscomp"} loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))() end})
 MainTab:CreateButton({Name = "nosniy", Callback = function() getgenv().Config = {victim = 20349956, level = 1126, streak = 1927, elo = 92802829228922892829272, keys = 1000, premium = true, verified = false, unlockall = true, platform = "DESKTOP", join = "discord.gg/rivalscomp"} loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))() end})
