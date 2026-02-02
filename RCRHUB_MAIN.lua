@@ -16,6 +16,27 @@ local Window = Rayfield:CreateWindow({
 local MainTab = Window:CreateTab("Home", 4483362458) 
 local VisualTab = Window:CreateTab("Visuals", 4483362458)
 
+MainTab:CreateSection("Emergency")
+
+MainTab:CreateButton({
+   Name = "OFF ALL (Reset & Close)",
+   Callback = function()
+       local lighting = game:GetService("Lighting")
+       lighting.Brightness = 1
+       lighting.ClockTime = 12
+       lighting.FogEnd = 1000
+       lighting.GlobalShadows = true
+       getgenv().Config = nil
+       local player = game.Players.LocalPlayer
+       if player.Character and player.Character:FindFirstChild("Humanoid") then
+           player.Character.Humanoid.WalkSpeed = 16
+       end
+       Rayfield:Notify({Title = "RCR SYSTEM", Content = "Cleaning up and closing menu...", Duration = 3})
+       task.wait(1)
+       Rayfield:Destroy()
+   end,
+})
+
 MainTab:CreateSection("Bypass")
 
 MainTab:CreateButton({
@@ -36,7 +57,48 @@ MainTab:CreateButton({
    end,
 })
 
+MainTab:CreateSection("Movement")
+
+MainTab:CreateSlider({
+   Name = "WalkSpeed",
+   Info = "Default speed is 16",
+   Range = {16, 200},
+   Increment = 1,
+   Suffix = " Speed",
+   CurrentValue = 16,
+   Flag = "WS_Slider",
+   Callback = function(Value)
+       local player = game.Players.LocalPlayer
+       if player.Character and player.Character:FindFirstChild("Humanoid") then
+           player.Character.Humanoid.WalkSpeed = Value
+       end
+   end,
+})
+
 MainTab:CreateSection("Utilities")
+
+MainTab:CreateButton({
+   Name = "Take the L (Emote Swap)",
+   Callback = function()
+       local ReplicatedStorage = game:GetService("ReplicatedStorage")
+       local EmotesFolder = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Emotes")
+       local shoulderBrush = EmotesFolder:FindFirstChild("Shoulder Brush")
+       local takeTheL = EmotesFolder:FindFirstChild("Take The L")
+
+       if shoulderBrush and takeTheL then
+           local oldRequire
+           oldRequire = hookfunction(require, function(module)
+               if module == shoulderBrush then
+                   return require(takeTheL)
+               end
+               return oldRequire(module)
+           end)
+           Rayfield:Notify({Title = "Emote Active", Content = "Shoulder Brush now plays Take The L!", Duration = 5})
+       else
+           Rayfield:Notify({Title = "Error", Content = "Emotes not found in game files.", Duration = 5})
+       end
+   end,
+})
 
 MainTab:CreateButton({
    Name = "Skin Changer",
@@ -56,13 +118,6 @@ MainTab:CreateButton({
    Name = "fps booster",
    Callback = function()
        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))()
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "stretched res",
-   Callback = function()
-       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
    end,
 })
 
@@ -116,13 +171,6 @@ MainTab:CreateButton({
 })
 
 MainTab:CreateButton({
-   Name = "MODERN (click ctrl to open)",
-   Callback = function()
-       loadstring(game:HttpGet('https://exploit.plus/Loader'))()
-   end,
-})
-
-MainTab:CreateButton({
    Name = "xorfee",
    Callback = function()
        getgenv().Config = {
@@ -139,41 +187,6 @@ MainTab:CreateButton({
            join = "discord.gg/rivalscomp"
        }
        loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "nosniy",
-   Callback = function()
-       getgenv().Config = {
-           victim = 20349956,
-           helper = "",
-           level = 1126,
-           streak = 1927,
-           elo = 92802829228922892829272,
-           keys = 1000,
-           premium = true,
-           verified = false,
-           unlockall = true,
-           platform = "DESKTOP",
-           join = "discord.gg/rivalscomp"
-       }
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "yabujin",
-   Callback = function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/yashitcrack.lua"))()
-   end,
-})
-
-MainTab:CreateButton({
-   Name = "Copy Discord",
-   Callback = function()
-       if setclipboard then setclipboard("https://discord.gg/zeCVjkB29y") end
-       Rayfield:Notify({Title = "Discord", Content = "Link Copied!", Duration = 3})
    end,
 })
 
