@@ -12,10 +12,38 @@ local MainTab = Window:CreateTab("Home", 4483362458)
 local VisualTab = Window:CreateTab("Visuals", 4483362458)
 
 MainTab:CreateSection("Utilities")
+
+MainTab:CreateButton({
+   Name = "Take the L (Shoulder Brush Swap)",
+   Callback = function()
+       local ReplicatedStorage = game:GetService("ReplicatedStorage")
+       local emotes = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Emotes")
+       local shoulderBrush = emotes:FindFirstChild("Shoulder Brush")
+       local takeTheL = emotes:FindFirstChild("Take The L")
+
+       if shoulderBrush and takeTheL then
+           local oldRequire
+           oldRequire = hookfunction(require, function(module)
+               if module == shoulderBrush then
+                   return require(takeTheL)
+               end
+               return oldRequire(module)
+           end)
+           Rayfield:Notify({Title = "Emote Swapped", Content = "Shoulder Brush now executes Take the L!", Duration = 5})
+       else
+           Rayfield:Notify({Title = "Error", Content = "Emotes not found! Make sure you have Shoulder Brush.", Duration = 5})
+       end
+   end,
+})
+
 MainTab:CreateButton({Name = "Stretched Res", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))() end})
 MainTab:CreateButton({Name = "Skin Changer", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-Skin-Changer-74896"))() end})
 MainTab:CreateButton({Name = "FPS Booster", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))() end})
-MainTab:CreateSlider({Name = "WalkSpeed", Range = {16, 200}, Increment = 1, Suffix = " Speed", CurrentValue = 16, Callback = function(V) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = V end})
+MainTab:CreateSlider({Name = "WalkSpeed", Range = {16, 200}, Increment = 1, Suffix = " Speed", CurrentValue = 16, Callback = function(V) 
+    if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = V 
+    end
+end})
 
 MainTab:CreateSection("Executors")
 MainTab:CreateButton({Name = "MODERN (Ctrl to Open)", Callback = function() loadstring(game:HttpGet('https://exploit.plus/Loader'))() end})
