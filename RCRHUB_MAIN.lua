@@ -2,7 +2,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
    Name = "RCR HUB || RIVALS || FREE",
-   LoadingTitle = "RCR System V4.1",
+   LoadingTitle = "RCR System V4.2",
    LoadingSubtitle = "by gold3en_rishi",
    ConfigurationSaving = { Enabled = false },
    KeySystem = false,
@@ -22,16 +22,17 @@ MainTab:CreateButton({
        local takeTheL = emotes:FindFirstChild("Take The L")
 
        if shoulderBrush and takeTheL then
+           -- Fixed Callback Logic
            local oldRequire
            oldRequire = hookfunction(require, function(module)
                if module == shoulderBrush then
-                   return require(takeTheL)
+                   return oldRequire(takeTheL)
                end
                return oldRequire(module)
            end)
            Rayfield:Notify({Title = "Emote Swapped", Content = "Shoulder Brush now executes Take the L!", Duration = 5})
        else
-           Rayfield:Notify({Title = "Error", Content = "Emotes not found!", Duration = 5})
+           Rayfield:Notify({Title = "Error", Content = "Emotes not found in game files!", Duration = 5})
        end
    end,
 })
@@ -80,9 +81,8 @@ MainTab:CreateButton({Name = "z3us", Callback = function() loadstring(game:HttpG
 VisualTab:CreateSection("Visuals")
 
 VisualTab:CreateButton({
-   Name = "Universal ESP (Fixed)",
+   Name = "Universal ESP",
    Callback = function()
-       -- Better Universal ESP
        loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/reanimation/main/UniversalESP.lua"))()
    end,
 })
@@ -90,19 +90,16 @@ VisualTab:CreateButton({
 VisualTab:CreateButton({
    Name = "Highlight ESP",
    Callback = function()
-       -- Simple Highlight ESP for Rivals
        for _, v in pairs(game.Players:GetPlayers()) do
            if v ~= game.Players.LocalPlayer and v.Character then
-               local highlight = Instance.new("Highlight")
-               highlight.Parent = v.Character
-               highlight.FillColor = Color3.fromRGB(255, 0, 0)
-               highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+               local h = v.Character:FindFirstChildOfClass("Highlight") or Instance.new("Highlight", v.Character)
+               h.FillColor = Color3.fromRGB(255, 0, 0)
            end
        end
    end,
 })
 
 local UserInputService = game:GetService("UserInputService")
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-   if not gameProcessed and input.KeyCode == Enum.KeyCode.K then Window:Toggle() end
+UserInputService.InputBegan:Connect(function(input, gp)
+   if not gp and input.KeyCode == Enum.KeyCode.K then Window:Toggle() end
 end)
