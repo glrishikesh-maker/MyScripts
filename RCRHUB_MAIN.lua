@@ -2,7 +2,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
    Name = "RCR HUB || RIVALS || FREE",
-   LoadingTitle = "RCR System V4.2",
+   LoadingTitle = "RCR System V5",
    LoadingSubtitle = "by gold3en_rishi",
    ConfigurationSaving = { Enabled = false },
    KeySystem = false,
@@ -11,6 +11,28 @@ local Window = Rayfield:CreateWindow({
 local MainTab = Window:CreateTab("Home", 4483362458)
 local VisualTab = Window:CreateTab("Visuals", 4483362458)
 
+-- SECURITY SECTION
+MainTab:CreateSection("Security")
+
+MainTab:CreateButton({
+   Name = "Universal AC Bypass",
+   Callback = function()
+       local gmt = getrawmetatable(game)
+       setreadonly(gmt, false)
+       local old = gmt.__namecall
+       gmt.__namecall = newcclosure(function(self, ...)
+           local method = getnamecallmethod()
+           if method == "FireServer" and self.Name == "MainEvent" then
+               return 
+           end
+           return old(self, ...)
+       end)
+       setreadonly(gmt, true)
+       Rayfield:Notify({Title = "Security", Content = "Anti-Cheat Bypass Active", Duration = 5})
+   end,
+})
+
+-- UTILITIES SECTION
 MainTab:CreateSection("Utilities")
 
 MainTab:CreateButton({
@@ -22,7 +44,6 @@ MainTab:CreateButton({
        local takeTheL = emotes:FindFirstChild("Take The L")
 
        if shoulderBrush and takeTheL then
-           -- Fixed Callback Logic
            local oldRequire
            oldRequire = hookfunction(require, function(module)
                if module == shoulderBrush then
@@ -30,24 +51,34 @@ MainTab:CreateButton({
                end
                return oldRequire(module)
            end)
-           Rayfield:Notify({Title = "Emote Swapped", Content = "Shoulder Brush now executes Take the L!", Duration = 5})
+           Rayfield:Notify({Title = "Success", Content = "Shoulder Brush is now Take the L", Duration = 5})
        else
-           Rayfield:Notify({Title = "Error", Content = "Emotes not found in game files!", Duration = 5})
+           Rayfield:Notify({Title = "Error", Content = "Emotes not found!", Duration = 5})
        end
    end,
 })
 
-MainTab:CreateButton({Name = "Stretched Res", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))() end})
-MainTab:CreateButton({Name = "Skin Changer", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-Skin-Changer-74896"))() end})
-MainTab:CreateButton({Name = "FPS Booster", Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Optiz-FpsBooster-60070"))() end})
+MainTab:CreateButton({
+   Name = "Stretched Res",
+   Callback = function()
+       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Stretched-Resolution-Higher-FOV-48170"))()
+   end,
+})
 
-MainTab:CreateSection("Movement")
-MainTab:CreateSlider({Name = "WalkSpeed", Range = {16, 200}, Increment = 1, Suffix = " Speed", CurrentValue = 16, Callback = function(V) 
-    if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = V 
-    end
-end})
+MainTab:CreateSlider({
+   Name = "WalkSpeed",
+   Range = {16, 200},
+   Increment = 1,
+   Suffix = " Speed",
+   CurrentValue = 16,
+   Callback = function(Value)
+       if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+           game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+       end
+   end,
+})
 
+-- SPOOFS SECTION
 MainTab:CreateSection("Spoofs")
 
 MainTab:CreateButton({
@@ -55,7 +86,6 @@ MainTab:CreateButton({
    Callback = function()
        getgenv().Config = {
            victim = 1796383039,
-           helper = "",
            level = 1242,
            streak = 1927,
            elo = 37899,
@@ -67,18 +97,32 @@ MainTab:CreateButton({
            join = "discord.gg/rivalscomp"
        }
        loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
-       Rayfield:Notify({Title = "Spoof Loaded", Content = "Sync Wu profile applied!", Duration = 3})
+       Rayfield:Notify({Title = "Spoof", Content = "Sync Wu Profile Loaded", Duration = 3})
    end,
 })
 
-MainTab:CreateButton({Name = "slingshot", Callback = function() getgenv().Config = {victim = 719253194, level = 456, streak = 1927, elo = 0, keys = 1000, premium = true, verified = true, unlockall = true, platform = "DESKTOP", join = "discord.gg/rivalscomp"} loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))() end})
-MainTab:CreateButton({Name = "nosniy", Callback = function() getgenv().Config = {victim = 20349956, level = 1126, streak = 1927, elo = 92802829228922892829272, keys = 1000, premium = true, verified = false, unlockall = true, platform = "DESKTOP", join = "discord.gg/rivalscomp"} loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))() end})
+MainTab:CreateButton({
+   Name = "Nosniy",
+   Callback = function()
+       getgenv().Config = {
+           victim = 20349956,
+           level = 1126,
+           streak = 1927,
+           elo = 92802829228922892829272,
+           keys = 1000,
+           premium = true,
+           verified = false,
+           unlockall = true,
+           platform = "DESKTOP",
+           join = "discord.gg/rivalscomp"
+       }
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/WEFGQERQEGWGE/a/refs/heads/main/UDRCRFRAMESCRIPT.lua"))()
+       Rayfield:Notify({Title = "Spoof", Content = "Nosniy Profile Loaded", Duration = 3})
+   end,
+})
 
-MainTab:CreateSection("Other Executors")
-MainTab:CreateButton({Name = "MODERN (Ctrl to Open)", Callback = function() loadstring(game:HttpGet('https://exploit.plus/Loader'))() end})
-MainTab:CreateButton({Name = "z3us", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/blackowl1231/ZYPHERION/refs/heads/main/main.lua'))() end})
-
-VisualTab:CreateSection("Visuals")
+-- VISUALS TAB
+VisualTab:CreateSection("ESP")
 
 VisualTab:CreateButton({
    Name = "Universal ESP",
@@ -86,20 +130,3 @@ VisualTab:CreateButton({
        loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/reanimation/main/UniversalESP.lua"))()
    end,
 })
-
-VisualTab:CreateButton({
-   Name = "Highlight ESP",
-   Callback = function()
-       for _, v in pairs(game.Players:GetPlayers()) do
-           if v ~= game.Players.LocalPlayer and v.Character then
-               local h = v.Character:FindFirstChildOfClass("Highlight") or Instance.new("Highlight", v.Character)
-               h.FillColor = Color3.fromRGB(255, 0, 0)
-           end
-       end
-   end,
-})
-
-local UserInputService = game:GetService("UserInputService")
-UserInputService.InputBegan:Connect(function(input, gp)
-   if not gp and input.KeyCode == Enum.KeyCode.K then Window:Toggle() end
-end)
